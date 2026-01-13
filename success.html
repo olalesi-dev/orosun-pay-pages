@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Processing payment…</title>
+</head>
+<body>
+<h2>Processing your payment…</h2>
+
+<script>
+(async function () {
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get("session_id");
+  if (!sessionId) {
+    document.body.innerHTML = "<h3>Missing payment session.</h3>";
+    return;
+  }
+
+  for (let i = 0; i < 6; i++) {
+    const res = await fetch(`https://www.orosunhealth/postpay/next?session_id=${encodeURIComponent(sessionId)}`);
+    if (res.ok) {
+      const data = await res.json();
+      window.location.href = data.next_url;
+      return;
+    }
+    await new Promise(r => setTimeout(r, 800));
+  }
+
+  document.body.innerHTML = "<p>Please refresh this page in a moment.</p>";
+})();
+</script>
+</body>
+</html>
