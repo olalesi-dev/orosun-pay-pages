@@ -1,13 +1,6 @@
 {
   "hosting": {
-    "site": "orosun-pay-site",
     "public": "public",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-    "rewrites": [
-      { "source": "/start", "destination": "/start.html" },
-      { "source": "/success", "destination": "/success.html" },
-      { "source": "/cancel", "destination": "/cancel.html" }
-    ]
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }
-
