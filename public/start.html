@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Start Your Review</h2>
+
+
+<select id="tier">
+  <option value="149">$149 Report Interpretation</option>
+  <option value="249">$249 Standard Imaging Review</option>
+  <option value="349">$349 Complex Study Review</option>
+  <option value="495">$495 Imaging + Video Consult</option>
+</select>
+
+
+<br/><br/>
+<button onclick="pay()">Pay Now</button>
+
+
+<script>
+const RUN = "https://orosun-pay-site-979713334730.northamerica-northeast2.run.app";
+
+
+async function pay() {
+  const tier = document.getElementById("tier").value;
+  const res = await fetch(`${RUN}/create-checkout`, {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({ tier })
+  });
+  const data = await res.json();
+  window.location.href = data.checkout_url;
+}
+</script>
+</body>
+</html>
